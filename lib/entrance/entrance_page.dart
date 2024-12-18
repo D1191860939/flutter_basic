@@ -17,12 +17,11 @@ class EntrancePage extends StatelessWidget {
             title: const Text("测试入口")),
         body: Container(
             width: double.infinity,
+            padding: const EdgeInsets.all(16),
             decoration: const BoxDecoration(color: Colors.white),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  SizedBox(
+            child: Column(
+              children: [
+                SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () => {
@@ -55,7 +54,6 @@ class EntrancePage extends StatelessWidget {
                     ),
                   )
                 ],
-              ),
             )));
   }
 }

@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:hello_flutter/guess/answer_status.dart';
+import 'package:hello_flutter/guess/guess_appbar.dart';
+import 'package:hello_flutter/guess/result_notice.dart';
 
 class GuessPage extends StatefulWidget {
   const GuessPage({super.key, required this.title});
@@ -22,8 +24,10 @@ class GuessPage extends StatefulWidget {
 }
 
 class _GuessPageState extends State<GuessPage> {
-  int _counter = 0;
+  int _value = 0;
   final Random _random = Random();
+  AnswerStatus _answerStatus = AnswerStatus.notStart;
+  final TextEditingController _controller = TextEditingController();
 
   void _generateRandomNumber() {
     setState(() {
@@ -32,8 +36,17 @@ class _GuessPageState extends State<GuessPage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter = _random.nextInt(100);
+      _value = _random.nextInt(100);
+      _answerStatus = AnswerStatus.init;
     });
+  }
+
+  Widget _buildGreyArea() {
+    return Expanded(
+        child: Container(
+            alignment: Alignment.center,
+            color: Colors.transparent,
+            constraints: const BoxConstraints(minWidth: double.infinity)));
   }
 
   @override
@@ -45,49 +58,41 @@ class _GuessPageState extends State<GuessPage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarBrightness: Brightness.dark,
-            statusBarColor: Colors.transparent),
-        leading: const Icon(
-          Icons.menu,
-          color: Colors.black,
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.run_circle_outlined,
-              color: Colors.blue,
-            ),
-            onPressed: () {},
-            splashRadius: 20,
-          )
-        ],
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: const TextField(
-          keyboardType: TextInputType.number,
-          decoration: InputDecoration(
-              filled: true,
-              fillColor: Color(0xfff3f6f9),
-              border: UnderlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(6)),
-                borderSide: BorderSide.none,
-              ),
-              hintText: "输入 0~99 数字",
-              hintStyle: TextStyle(fontSize: 14)),
-        ),
-      ),
-      body: Stack(
-          children: [
-            Column(children: [
+      appBar: GuessAppbar(
+          controller: _controller,
+          onCheck: () {
+            if (_answerStatus == AnswerStatus.notStart) {
+              return;
+            }
+            int? inputValue = int.tryParse(_controller.text);
+            if (inputValue == null) {
+              return;
+            }
 
+            setState(() {
+              if (inputValue > _value) {
+                _answerStatus = AnswerStatus.greater;
+              } else if (inputValue < _value) {
+                _answerStatus = AnswerStatus.less;
+              } else {
+                _answerStatus = AnswerStatus.equal;
+              }
+            });
+          }),
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              if (_answerStatus == AnswerStatus.greater)
+                ResultNotice(color: Colors.redAccent, info: "大了"),
+              if (_answerStatus == AnswerStatus.greater ||
+                  _answerStatus == AnswerStatus.less)
+                _buildGreyArea(),
+              if (_answerStatus == AnswerStatus.less)
+                ResultNotice(color: Colors.blueAccent, info: "小了"),
             ],),
-            Column(
+          Center(
+            child: Column(
               // Column is also a layout widget. It takes a list of children and
               // arranges them vertically. By default, it sizes itself to fit its
               // children horizontally, and tries to be as tall as its parent.
@@ -103,21 +108,27 @@ class _GuessPageState extends State<GuessPage> {
               // wireframe for each widget.
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  '点击生成随机数值',
-                ),
+                if (_answerStatus == AnswerStatus.notStart)
+                  const Text('点击生成随机数值'),
                 Text(
-                  '$_counter',
+                  _answerStatus == AnswerStatus.notStart ||
+                          _answerStatus == AnswerStatus.equal
+                      ? '$_value'
+                      : "**",
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ],
-            )
-          ],
+            ),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _generateRandomNumber,
+        onPressed: _answerStatus == AnswerStatus.notStart
+            ? _generateRandomNumber
+            : null,
         tooltip: 'Increment',
-        backgroundColor: Colors.blue,
+        backgroundColor:
+            _answerStatus == AnswerStatus.notStart ? Colors.blue : Colors.grey,
         shape: const CircleBorder(),
         child: const Icon(
           Icons.generating_tokens_outlined,
