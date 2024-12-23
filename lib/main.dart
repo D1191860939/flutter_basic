@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hello_flutter/entrance/entrance_page.dart';
-import 'package:hello_flutter/guess/guess_page.dart';
-
-import 'counter/counter_page.dart';
 
 void main() {
   runApp(const MyApp());

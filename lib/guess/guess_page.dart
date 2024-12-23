@@ -6,7 +6,7 @@ import 'package:hello_flutter/guess/guess_appbar.dart';
 import 'package:hello_flutter/guess/result_notice.dart';
 
 class GuessPage extends StatefulWidget {
-  const GuessPage({super.key, required this.title});
+  const GuessPage({super.key});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -17,7 +17,7 @@ class GuessPage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+  // final String title;
 
   @override
   State<GuessPage> createState() => _GuessPageState();

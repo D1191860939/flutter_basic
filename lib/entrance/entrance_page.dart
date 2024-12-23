@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/guess/guess_page.dart';
 import 'package:hello_flutter/pavlova/pavlova_page.dart';
+import 'package:hello_flutter/state/tap_box_page.dart';
+import 'package:hello_flutter/ui/text_page.dart';
+import 'package:hello_flutter/wooden/wooden_fish_page.dart';
 
 import '../counter/counter_page.dart';
 
 class EntrancePage extends StatelessWidget {
   const EntrancePage({super.key});
+
+  Widget _buildItem(BuildContext context, String text, WidgetBuilder builder) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () =>
+            {Navigator.of(context).push(MaterialPageRoute(builder: builder))},
+        child: Text(text),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,39 +35,16 @@ class EntrancePage extends StatelessWidget {
             decoration: const BoxDecoration(color: Colors.white),
             child: Column(
               children: [
-                SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () => {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                const MyHomePage(title: "计数器")))
-                      },
-                      child: const Text("计数器"),
-                    ),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () => {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                const GuessPage(title: "猜数字")))
-                      },
-                      child: const Text("猜数字"),
-                    ),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => Pavlovapage()));
-                      },
-                      child: const Text("官网 Layout Introduction"),
-                    ),
-                  )
-                ],
+                _buildItem(context, "计数器", (context) => const MyHomePage()),
+                _buildItem(context, "猜数字", (context) => const GuessPage()),
+                _buildItem(context, "官网 Layout Introduction",
+                    (context) => Pavlovapage()),
+                _buildItem(
+                    context, "电子木鱼", (context) => const WoodenFishPage()),
+                _buildItem(
+                    context, "Flutter实战-状态管理", (context) => TapBoxPage()),
+                _buildItem(context, "Flutter实战-文本及样式", (context) => TextPage())
+              ],
             )));
   }
 }
