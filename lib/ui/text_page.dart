@@ -1,7 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class TextPage extends StatelessWidget {
-  const TextPage({super.key});
+  final TapGestureRecognizer _tapGestureRecognizer = TapGestureRecognizer();
+
+  TextPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +15,27 @@ class TextPage extends StatelessWidget {
       body: Column(
         children: [
           Text(
-            "Hello World",
-            textAlign: TextAlign.left,
+            "Hello World" * 6,
+            textAlign: TextAlign.center,
           ),
           Text(
-            "Hello world! I'm Jack. " * 4,
+            "Hello world! I'm Jack. " * 8,
             overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
-          Text("Hello World", style: TextStyle(fontWeight: FontWeight.bold)),
+          Text("Hello World",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.lightGreen,
+                  fontSize: 16)),
+          Text.rich(
+              TextSpan(
+                  children: [
+                    TextSpan(text: "Home:"),
+                    TextSpan(text: "https://flutterchina.club", style: TextStyle(color: Colors.blue), recognizer: _tapGestureRecognizer)
+                  ]
+              )
+          )
         ],
       ),
     );

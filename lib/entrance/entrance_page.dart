@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hello_flutter/guess/guess_page.dart';
 import 'package:hello_flutter/pavlova/pavlova_page.dart';
 import 'package:hello_flutter/state/tap_box_page.dart';
+import 'package:hello_flutter/ui/button_page.dart';
 import 'package:hello_flutter/ui/text_page.dart';
 import 'package:hello_flutter/wooden/wooden_fish_page.dart';
 
@@ -42,8 +43,10 @@ class EntrancePage extends StatelessWidget {
                 _buildItem(
                     context, "电子木鱼", (context) => const WoodenFishPage()),
                 _buildItem(
-                    context, "Flutter实战-状态管理", (context) => TapBoxPage()),
-                _buildItem(context, "Flutter实战-文本及样式", (context) => TextPage())
+                    context, "Flutter 实战-状态管理", (context) => TapBoxPage()),
+                _buildItem(
+                    context, "Flutter 实战-文本及样式", (context) => TextPage()),
+                _buildItem(context, "Flutter 实战-按钮", (context) => ButtonPage())
               ],
             )));
   }
