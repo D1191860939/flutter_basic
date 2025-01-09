@@ -3,6 +3,10 @@ import 'package:hello_flutter/guess/guess_page.dart';
 import 'package:hello_flutter/pavlova/pavlova_page.dart';
 import 'package:hello_flutter/state/tap_box_page.dart';
 import 'package:hello_flutter/ui/button_page.dart';
+import 'package:hello_flutter/ui/checkbox_page.dart';
+import 'package:hello_flutter/ui/image_page.dart';
+import 'package:hello_flutter/ui/progress_page.dart';
+import 'package:hello_flutter/ui/text_field_page.dart';
 import 'package:hello_flutter/ui/text_page.dart';
 import 'package:hello_flutter/wooden/wooden_fish_page.dart';
 
@@ -46,7 +50,15 @@ class EntrancePage extends StatelessWidget {
                     context, "Flutter 实战-状态管理", (context) => TapBoxPage()),
                 _buildItem(
                     context, "Flutter 实战-文本及样式", (context) => TextPage()),
-                _buildItem(context, "Flutter 实战-按钮", (context) => ButtonPage())
+                _buildItem(context, "Flutter 实战-按钮", (context) => ButtonPage()),
+                _buildItem(
+                    context, "Flutter 实战-图片及 Icon", (context) => ImagePage()),
+                _buildItem(context, "Flutter 实战-单选开关和复选框",
+                    (context) => CheckboxPage()),
+                _buildItem(
+                    context, "Flutter 实战-输入框", (context) => TextFieldPage()),
+                _buildItem(
+                    context, "Flutter 实战-进度条", (context) => ProgressPage()),
               ],
             )));
   }
