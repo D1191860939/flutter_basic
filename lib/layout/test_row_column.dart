@@ -13,20 +13,36 @@ class TestRowColumnPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("hello world"),
               Text("I am Flutter"),
             ],
-            mainAxisAlignment: MainAxisAlignment.center,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text("hello world"),
               Text("I'm flutter"),
             ],
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-          )
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            textDirection: TextDirection.rtl,
+            children: [
+              Text("hello world"),
+              Text("I'm flutter"),
+            ],
+          ),
+          Row(
+            verticalDirection: VerticalDirection.up,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("hello world", style: TextStyle(fontSize: 30.0),),
+              Text("I'm flutter"),
+            ],
+          ),
         ],
       ),
     );
