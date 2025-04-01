@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/guess/guess_page.dart';
+import 'package:hello_flutter/layout/animated_list_test_page.dart';
+import 'package:hello_flutter/layout/grid_view_test_page.dart';
+import 'package:hello_flutter/layout/listview_test_page.dart';
+import 'package:hello_flutter/layout/page_view_test_page.dart';
+import 'package:hello_flutter/layout/scroll_controller_test_page.dart';
+import 'package:hello_flutter/layout/tabbarview_test_page.dart';
 import 'package:hello_flutter/layout/test_layout_page.dart';
+import 'package:hello_flutter/padding/padding_test_page.dart';
 import 'package:hello_flutter/pavlova/pavlova_page.dart';
 import 'package:hello_flutter/state/tap_box_page.dart';
 import 'package:hello_flutter/ui/button_page.dart';
@@ -67,6 +74,20 @@ class EntrancePage extends StatelessWidget {
                       (context) => const TestLayoutPage()),
                   _buildItem(context, "Flutter 实战-布局测试2",
                       (context) => const TestRowColumnPage()),
+                  _buildItem(context, "Flutter 实战-填充",
+                      (context) => const PaddingTestPage()),
+                  _buildItem(context, "Flutter 实战-ListView",
+                      (context) => const ListViewTestPage()),
+                  _buildItem(context, "Flutter 实战-滚动控制",
+                      (context) => const ScrollControllerTestPage()),
+                  _buildItem(context, "Flutter 实战-AnimatedList",
+                      (context) => const AnimatedListTestPage()),
+                  _buildItem(context, "Flutter 实战-GridView",
+                      (context) => const GridViewTestPage()),
+                  _buildItem(context, "Flutter 实战-PageView",
+                      (context) => const PageViewTestPage()),
+                  _buildItem(context, "Flutter 实战-TabBarView",
+                      (context) => const TabBarViewTestPage()),
                 ],
               ),
             )));
