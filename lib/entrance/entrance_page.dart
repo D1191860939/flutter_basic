@@ -9,6 +9,7 @@ import 'package:hello_flutter/layout/tabbarview_test_page.dart';
 import 'package:hello_flutter/layout/test_layout_page.dart';
 import 'package:hello_flutter/padding/padding_test_page.dart';
 import 'package:hello_flutter/pavlova/pavlova_page.dart';
+import 'package:hello_flutter/seconds/second_tab_page.dart';
 import 'package:hello_flutter/state/tap_box_page.dart';
 import 'package:hello_flutter/ui/button_page.dart';
 import 'package:hello_flutter/ui/checkbox_page.dart';
@@ -88,6 +89,7 @@ class EntrancePage extends StatelessWidget {
                       (context) => const PageViewTestPage()),
                   _buildItem(context, "Flutter 实战-TabBarView",
                       (context) => const TabBarViewTestPage()),
+                  _buildItem(context, "电子秒表", (context) => const SecondsTabPage()),
                 ],
               ),
             )));
